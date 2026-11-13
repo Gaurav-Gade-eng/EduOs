@@ -1,0 +1,35 @@
+build/
+node_modules/
+*.log
+# Generated build files
+/build/
+
+# Compiled binaries and object files
+*.elf
+*.bin
+*.o
+*.ao
+
+# Virtual disk images
+*.img
+
+# Node.js dependencies
+node_modules/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Backup files
+*.backup
+*.bak
+*.swp
+
+# Coverage and temporary files
+coverage/
+*.tmp
+
+# Operating system files
+.DS_Store
+Thumbs.db

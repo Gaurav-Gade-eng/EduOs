@@ -1,0 +1,14 @@
+{
+  "name": "eduos-dashboard",
+  "version": "0.1.0",
+  "description": "EduOS visualization dashboard (reads QEMU serial telemetry)",
+  "main": "server.js",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test test/dashboard.test.js",
+    "demo": "node tools/replay.js ../tests/sample-events/boot-session.log ../build/eduos_events.log"
+  },
+  "engines": { "node": ">=18" },
+  "dependencies": { "express": "^4.19.2" }
+}

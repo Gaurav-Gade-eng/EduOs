@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EduOS Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>EduOS <span class="muted">Dashboard</span></h1>
+    <nav id="nav">
+      <button data-page="processes" class="active">Processes</button>
+      <button data-page="performance">Performance</button>
+      <button data-page="details">Details</button>
+      <button data-page="services">Services</button>
+    </nav>
+    <div class="controls">
+      <span id="health" class="badge">connecting…</span>
+      <label>Refresh
+        <select id="interval">
+          <option value="1000">1 s</option>
+          <option value="2500" selected>2.5 s</option>
+          <option value="5000">5 s</option>
+        </select>
+      </label>
+      <button id="refresh">Refresh now</button>
+    </div>
+  </header>
+
+  <div id="banner" class="banner" hidden></div>
+
+  <main>
+    <section id="page-processes" class="page">
+      <div class="toolbar">
+        <input id="proc-search" type="search" placeholder="Search PID, name or state">
+        <span id="proc-count" class="muted"></span>
+      </div>
+      <table>
+        <thead><tr><th>PID</th><th>Name</th><th>State</th><th>Priority</th><th>CPU ticks</th><th>Last reason</th></tr></thead>
+        <tbody id="proc-body"></tbody>
+      </table>
+      <div id="proc-detail" class="card" hidden></div>
+    </section>
+
+    <section id="page-performance" class="page" hidden>
+      <div class="tabs">
+        <button data-sub="memory" class="active">Memory</button>
+        <button data-sub="scheduler">Scheduler</button>
+      </div>
+      <div id="sub-memory">
+        <div class="grid" id="mem-cards"></div>
+        <canvas id="mem-chart" width="800" height="200"></canvas>
+        <p class="muted">Memory is the physical frame pool (1–16 MiB) reported by the kernel allocator.</p>
+      </div>
+      <div id="sub-scheduler" hidden>
+        <div class="grid" id="sched-cards"></div>
+        <canvas id="sw-chart" width="800" height="160"></canvas>
+        <p class="muted">Context-switch rate is computed from successive counter samples. Guest CPU utilisation is only shown from kernel idle/total tick counters.</p>
+      </div>
+    </section>
+
+    <section id="page-details" class="page" hidden>
+      <div class="grid" id="detail-cards"></div>
+      <div class="toolbar">
+        <input id="ev-search" type="search" placeholder="Filter events (category, event, text)">
+        <select id="ev-cat"><option value="">All categories</option></select>
+      </div>
+      <table>
+        <thead><tr><th>#</th><th>Category</th><th>Event</th><th>Fields</th></tr></thead>
+        <tbody id="ev-body"></tbody>
+      </table>
+      <h3>Paging</h3><div id="paging-box" class="card"></div>
+      <h3>Disk &amp; file system</h3><div id="fs-box" class="card"></div>
+    </section>
+
+    <section id="page-services" class="page" hidden>
+      <div class="grid" id="svc-cards"></div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
